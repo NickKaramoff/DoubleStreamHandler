@@ -2,6 +2,10 @@
 
 > A StreamHandler wrapper that outputs messages to different streams based on logLevel
 
+[![See on PyPI](https://badgen.net/pypi/v/double-stream-handler)](https://pypi.org/project/double-stream-handler/)
+[![Licenced under the BSD-3-Clause licence](https://badgen.net/pypi/license/double-stream-handler?label=licence)](LICENSE)
+![for Python 3.6 and later](https://badgen.net/pypi/python/double-stream-handler)
+
 Logging to the console is a nice feature to have, and Python's [`StreamHandler`](https://docs.python.org/3.9/library/logging.handlers.html#logging.StreamHandler) is of great help. However, it can only output to one stream at a time, and by default it's `stderr`.
 
 This goes well with the default settings (`level=WARNING`), but it isn't good when you decide to output `INFO` messages as well.
