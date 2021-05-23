@@ -4,7 +4,7 @@ import sys
 from typing import TextIO, Tuple
 
 
-__version__ = "0.1.0b1"
+__version__ = "1.0.0-rc.1"
 
 
 class DoubleStreamHandler(logging.Handler):
