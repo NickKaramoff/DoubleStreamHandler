@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "double-stream-handler"
-version = "0.1.0"
+version = "0.1.0b1"
 description = "A StreamHandler wrapper that outputs messages to different streams based on loglevel"
 authors = ["Nikita Karamov <nick@karamoff.dev>"]
 license = "BSD-3-Clause"
