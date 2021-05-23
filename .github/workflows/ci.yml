@@ -9,65 +9,64 @@ on:
 jobs:
   isort:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Set up latest Python
-      uses: actions/setup-python@v2
-    - name: Install isort
-      run: pip install isort
-    - name: Lint with isort
-      run: isort --check --diff double_stream_handler
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up latest Python
+        uses: actions/setup-python@v2
+      - name: Install isort
+        run: pip install isort
+      - name: Lint with isort
+        run: isort --check --diff double_stream_handler
 
   black:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Set up latest Python
-      uses: actions/setup-python@v2
-    - name: Install Black
-      run: pip install black
-    - name: Lint with Black
-      run: black --check --diff double_stream_handler
-  
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up latest Python
+        uses: actions/setup-python@v2
+      - name: Install Black
+        run: pip install black
+      - name: Lint with Black
+        run: black --check --diff double_stream_handler
+
   test:
     runs-on: ubuntu-latest
-    needs: [isort, black]
+    needs: [ isort, black ]
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: [ 3.6, 3.7, 3.8, 3.9 ]
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Setup Poetry
-      uses: Gr1N/setup-poetry@v4
-    - name: Install dependencies
-      run: poetry install
-    - name: Test with unittest
-      run: poetry run python -m unittest
-  
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Setup Poetry
+        uses: Gr1N/setup-poetry@v4
+      - name: Install dependencies
+        run: poetry install
+      - name: Test with unittest
+        run: poetry run python -m unittest
+
   build:
-    name: Try building the package
     runs-on: ubuntu-latest
-    needs: [test]
+    needs: [ test ]
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Set up latest Python
-      uses: actions/setup-python@v2
-    - name: Setup Poetry
-      uses: Gr1N/setup-poetry@v4
-    - name: Install dependencies
-      run: poetry install
-    - name: Build
-      run: poetry build
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up latest Python
+        uses: actions/setup-python@v2
+      - name: Setup Poetry
+        uses: Gr1N/setup-poetry@v4
+      - name: Install dependencies
+        run: poetry install
+      - name: Build
+        run: poetry build
