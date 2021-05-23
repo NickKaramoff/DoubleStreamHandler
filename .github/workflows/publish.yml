@@ -1,0 +1,25 @@
+name: Publish the package
+
+on:
+  release:
+    types: [ created ]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up latest Python
+        uses: actions/setup-python@v2
+      - name: Setup Poetry
+        uses: Gr1N/setup-poetry@v4
+      - name: Install dependencies
+        run: poetry install
+      - name: Build and publish with Poetry
+        env:
+          PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          poetry build
+          poetry publish -u __token__ -p "$PYPI_TOKEN"
